@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "test": "jest --detectOpenHandles --forceExit"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Andeel-Hassan/flyrank-capstone-widget-platform.git"
@@ -28,5 +28,9 @@
     "jsonwebtoken": "^9.0.3",
     "pg": "^8.23.0",
     "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "jest": "^30.4.2",
+    "supertest": "^7.2.2"
   }
 }
