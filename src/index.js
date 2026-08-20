@@ -17,6 +17,8 @@ const widgetRoutes = require('./routes/widget.routes');
 app.use('/api/widgets', widgetRoutes);
 const publicWidgetRoutes = require('./routes/publicWidget.routes');
 app.use('/widgets', publicWidgetRoutes);
+const submissionRoutes = require('./routes/submission.routes');
+app.use('/api/submissions', submissionRoutes);
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' });
 });

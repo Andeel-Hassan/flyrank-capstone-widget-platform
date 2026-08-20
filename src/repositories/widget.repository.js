@@ -27,7 +27,7 @@ async function getWidgetById(id, tenantId) {
 
 async function getPublicWidgetById(id) {
   const result = await pool.query(
-    `SELECT id, type, title, description, fields, button_text, is_active
+    `SELECT id, tenant_id, type, title, description, fields, button_text, is_active
      FROM widgets WHERE id = $1 AND is_active = true`,
     [id]
   );
