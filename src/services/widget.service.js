@@ -1,11 +1,22 @@
 const widgetRepo = require('../repositories/widget.repository');
 
+const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
+
+function attachEmbedCode(widget) {
+  return {
+    ...widget,
+    embed_snippet: `<script src="${BASE_URL}/widget.js?id=${widget.id}"></script>`,
+  };
+}
+
 async function createWidget(tenantId, data) {
-  return widgetRepo.createWidget({ tenantId, ...data });
+  const widget = await widgetRepo.createWidget({ tenantId, ...data });
+  return attachEmbedCode(widget);
 }
 
 async function listWidgets(tenantId) {
-  return widgetRepo.getWidgetsByTenant(tenantId);
+  const widgets = await widgetRepo.getWidgetsByTenant(tenantId);
+  return widgets.map(attachEmbedCode);
 }
 
 async function getWidget(id, tenantId) {
@@ -15,7 +26,7 @@ async function getWidget(id, tenantId) {
     err.statusCode = 404;
     throw err;
   }
-  return widget;
+  return attachEmbedCode(widget);
 }
 
 async function updateWidget(id, tenantId, data) {
@@ -25,7 +36,7 @@ async function updateWidget(id, tenantId, data) {
     err.statusCode = 404;
     throw err;
   }
-  return widget;
+  return attachEmbedCode(widget);
 }
 
 async function deleteWidget(id, tenantId) {

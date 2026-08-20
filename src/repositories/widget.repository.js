@@ -25,6 +25,15 @@ async function getWidgetById(id, tenantId) {
   return result.rows[0];
 }
 
+async function getPublicWidgetById(id) {
+  const result = await pool.query(
+    `SELECT id, type, title, description, fields, button_text, is_active
+     FROM widgets WHERE id = $1 AND is_active = true`,
+    [id]
+  );
+  return result.rows[0];
+}
+
 async function updateWidget(id, tenantId, fieldsToUpdate) {
   const { type, title, description, fields, buttonText, isActive } = fieldsToUpdate;
   const result = await pool.query(
@@ -51,4 +60,4 @@ async function deleteWidget(id, tenantId) {
   return result.rows[0];
 }
 
-module.exports = { createWidget, getWidgetsByTenant, getWidgetById, updateWidget, deleteWidget };
+module.exports = { createWidget, getWidgetsByTenant, getWidgetById, getPublicWidgetById, updateWidget, deleteWidget };
