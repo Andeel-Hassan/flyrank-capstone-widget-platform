@@ -34,7 +34,8 @@ const submissionLimiter = rateLimit({
   message: { error: 'Too many submissions. Please try again later.' },
 });
 
-app.use('/api/submissions', submissionLimiter, submissionRoutes);
+const dashboardRoutes = require('./routes/dashboard.routes');
+app.use('/api/dashboard', dashboardRoutes);
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' });
