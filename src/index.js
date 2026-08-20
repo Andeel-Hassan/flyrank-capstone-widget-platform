@@ -7,7 +7,8 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
-
+const authRoutes = require('./routes/auth.routes');
+app.use('/api/auth', authRoutes);
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' });
 });
