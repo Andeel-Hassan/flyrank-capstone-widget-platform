@@ -7,6 +7,10 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+const path = require('path');
+app.use(express.static(path.join(__dirname, '..', 'public'), {
+  maxAge: '1y', // versioned bundle — cache long
+}));
 const authRoutes = require('./routes/auth.routes');
 app.use('/api/auth', authRoutes);
 const widgetRoutes = require('./routes/widget.routes');
