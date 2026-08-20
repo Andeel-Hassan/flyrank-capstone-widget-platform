@@ -9,6 +9,8 @@ app.use(cors());
 app.use(express.json());
 const authRoutes = require('./routes/auth.routes');
 app.use('/api/auth', authRoutes);
+const widgetRoutes = require('./routes/widget.routes');
+app.use('/api/widgets', widgetRoutes);
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' });
 });
