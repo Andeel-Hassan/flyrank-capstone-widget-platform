@@ -1,0 +1,45 @@
+name: flyrank-capstone-widget-platform
+description: Embeddable Widget & Lead-Capture Platform
+
+run: |
+  docker compose up -d
+  node src/db/migrate.js
+  node src/index.js
+
+seed: |
+  # After the server is running, create a test tenant and widget:
+  # curl -X POST http://localhost:3000/api/auth/signup -H "Content-Type: application/json" -d '{"name":"Test User","email":"test@example.com","password":"password123"}'
+  # Then log in and create a widget via POST /api/widgets
+
+test: npm test
+
+base_url: http://localhost:3000
+
+endpoints:
+  - method: POST
+    path: /api/auth/signup
+    auth: false
+  - method: POST
+    path: /api/auth/login
+    auth: false
+  - method: POST
+    path: /api/widgets
+    auth: true
+  - method: GET
+    path: /api/widgets
+    auth: true
+  - method: GET
+    path: /widgets/:id/config
+    auth: false
+  - method: GET
+    path: /widget.js
+    auth: false
+  - method: POST
+    path: /api/submissions
+    auth: false
+  - method: GET
+    path: /api/dashboard/submissions
+    auth: true
+  - method: GET
+    path: /api/dashboard/stats
+    auth: true
